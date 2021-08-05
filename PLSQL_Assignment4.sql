@@ -33,8 +33,6 @@ call multiple(5);
 -- 
 -- 
 
-
-
 create table whonum(num int(5));
 
 DELIMITER //
@@ -79,7 +77,7 @@ call pali('moon');
 
 -- 
 -- 
--- Trigger to insertion in empo table;
+-- Trigger to insertion in empo table with name uppercase;
 -- 
 -- 
 
@@ -181,19 +179,24 @@ select * from empo1;
 -- 5	goku	3000	1500
 
 DELIMITER //
-create function my_cur() returns varchar(100) reads sql data
+create procedure my_cur() 
 begin
-declare sum int(8);
-declare res varchar(200);
-declare sum_cur cursor for select * from empo1 where sal+comm>3000;
-
+declare s int(5);
+declare c int(5);
+declare id int(5);
+declare nam varchar(30);
+declare done boolean default 0;
+declare sum_cur cursor 
+for 
+select * from empo1;
 open sum_cur;
--- if sum_cur.sal+sum_cur.comm >3000 then
-fetch sum_cur into res;
--- end if;
+repeat
+fetch sum_cur into id, nam, s, c;
+if s+c>3000 then
+select s,c,id,nam;
+end if;
+until done end repeat;
 close sum_cur;
-
-return res;
 end //
 
-select my_cur();
+call my_cur();
