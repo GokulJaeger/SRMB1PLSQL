@@ -200,3 +200,23 @@ close sum_cur;
 end //
 
 call my_cur();
+
+--
+--
+-- Exception Handling
+--
+--
+
+create table stu(sid int(5)primary key, sname varchar(20), smail varchar(40));
+
+
+DELIMITER //
+create procedure crt_stu(sid int(5), sname varchar(20), smail varchar(40))
+begin
+declare exit handler for sqlexception select 'Error occured';
+insert into stu values(sid,sname,smail);    
+select * from stu;
+end //
+
+call crt_stu(1,'Anvesh','anvesh@gmail.com');
+call crt_stu(2,'Roy','Roy@gmail.com');
