@@ -126,12 +126,16 @@ insert into ebill values('C1','goku',50,null),('C2','deku',40,null),('C3','narut
 
 select * from ebill;
 
--- cno		cname		nunits		bamt
+-- cno		cname		nounits		bamt
 -- C1		goku		50	
 -- C2		deku		40	
 -- C3		naruto		30	
 -- C4		eren		72	
 -- C5		tanjiro		90	
+
+
+select * from ebill;
+
 
 DELIMITER //
 create procedure cal_bamt(in x varchar(10), out o decimal(8,2))
@@ -139,9 +143,8 @@ begin
 declare done boolean default 0;
 declare uits int(4);
 declare amt_cur cursor for
-select nunits from ebill where cno=x;
+select nounits from ebill where cno=x;
 open amt_cur;
-repeat
 fetch amt_cur into uits;
 if uits>200 then
 set o=(uits-200)*1.5+150;
@@ -150,9 +153,9 @@ set o=(uits-100)*1.5+50;
 else
 set o=uits*0.5;
 end if;
-until done end repeat;
 close amt_cur;
+update ebill set bamt=o where cno=x;
+select * from ebill where cno=x;
 end //
 
 call cal_bamt('C1', @va);
-select @va;
