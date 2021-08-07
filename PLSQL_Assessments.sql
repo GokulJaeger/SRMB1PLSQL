@@ -101,7 +101,9 @@ select * from myemp;
 
 alter table myemp add department int(3);
 
-desc 
+desc myemp;
+
+select 
 
 
 
@@ -162,3 +164,15 @@ end //
 
 call cal_bamt('C1', @va);
 select @va;
+
+-- cno	cname	nounits	bamt
+-- C1	goku	50		25.00
+
+select * from ebill;
+
+-- cno	cname	nounits	bamt
+-- C1	goku	50		25.00
+-- C2	deku	40	
+-- C3	naruto	30	
+-- C4	eren	72	
+C5	tanjiro	90	
