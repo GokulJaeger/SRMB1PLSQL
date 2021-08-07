@@ -103,15 +103,20 @@ alter table myemp add department int(3);
 
 desc myemp;
 
-select 
+
+select * from myemp;
+
+-- eno	ename		deptno		esal		experience		comm	department
+-- 7	Askcachm	6985		20000.00		2			2000
 
 
+insert into myemp values(2,'sachin',45820,52000,3,1000,2),(3,'karthik',820,20000,3,500,2),(4,'sweatha',450,10000,3,1400,1);
 
+select department, count(department) from myemp group by department;
 
-
-
-
-
+-- department	count(department)
+-- 	2				2
+-- 	1				1
 
 create table ebill(cno varchar(10)primary key, cname varchar(30)not null,nounits integer(4)not null,bamt decimal(8,2));
 
@@ -175,4 +180,4 @@ select * from ebill;
 -- C2	deku	40	
 -- C3	naruto	30	
 -- C4	eren	72	
-C5	tanjiro	90	
+-- C5	tanjiro	90	
