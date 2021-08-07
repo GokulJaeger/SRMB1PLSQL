@@ -112,11 +112,35 @@ select * from myemp;
 
 insert into myemp values(2,'sachin',45820,52000,3,1000,2),(3,'karthik',820,20000,3,500,2),(4,'sweatha',450,10000,3,1400,1);
 
+select * from myemp;
 select department, count(department) from myemp group by department;
 
 -- department	count(department)
 -- 	2				2
 -- 	1				1
+
+
+DELIMITER //
+create trigger day_trig1 before insert on myemp for each row 
+begin
+declare val1 varchar(20);
+declare val2 varchar(20);
+declare val3 varchar(20);
+set val1='Saturday';
+set val2='Sunday';
+set val3=current_date();
+if strcmp(val1,dayname(val3))=0 || strcmp(val2,dayname(val3))=0 then
+SIGNAL SQLSTATE '50001' SET MESSAGE_TEXT = 'Cannot insert on week end days';
+end if;
+end //
+
+insert into myemp values(10,'jacksparrow',2157,23000,3,100,5);
+
+
+
+
+
+
 
 create table ebill(cno varchar(10)primary key, cname varchar(30)not null,nounits integer(4)not null,bamt decimal(8,2));
 
@@ -167,7 +191,7 @@ update ebill set bamt=o where cno=x;
 select * from ebill where cno=x;
 end //
 
-call cal_bamt('C1', @va);
+call cal_bamt('C2', @va);
 select @va;
 
 -- cno	cname	nounits	bamt
