@@ -99,7 +99,9 @@ select * from myemp;
 -- 7	Askcachm	6985		20000.00		2			2000
 
 
+alter table myemp add department int(3);
 
+desc 
 
 
 
@@ -159,3 +161,4 @@ select * from ebill where cno=x;
 end //
 
 call cal_bamt('C1', @va);
+select @va;
