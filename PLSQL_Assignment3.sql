@@ -208,6 +208,8 @@ select * from student;
 -- 80			Browny		Male		511
 
 select (select avg(tot_mark) from student where sex='Male' group by sex) as MalAvg, (select avg(tot_mark) from student where sex='Female' group by sex) as FeAvg from student;
+
+
 select avg(tot_mark), sex from student group by sex;
 -- MalAvg		FeAvg
 -- 549.6667		589.0000

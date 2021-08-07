@@ -12,7 +12,7 @@ declare a int(5);
 declare pro int(5);
 set a=1;
 mul_loop: loop
-if a>x then
+if a>10 then
 leave mul_loop;
 end if;
 set pro=a*x;
@@ -51,7 +51,7 @@ end loop;
 select * from whonum;
 end //
 
-call whole_num(50);
+call whole_num(30);
 
 
 -- 
@@ -106,6 +106,7 @@ set new.name = upper(new.name);
 end //
 
 insert into empo values(5,'krillen');
+insert into empo values(6,'Latha'),(7,'gokul');
 
 select * from empo;
 
@@ -149,12 +150,14 @@ select * from worker;
 DELIMITER //
 create procedure delete_worker(in id int(5))
 begin
-if id<0 then
+if id<=0 then
 select 'Wrong input';
 else
 delete from worker where wid=id;
 end if;
 end //
+
+call delete_worker(5);
 
 
 select * from worker;
@@ -167,8 +170,8 @@ select * from worker;
 
 create table empo1(eid int(4)primary key, ename varchar(30),sal int(5), comm int(5));  
 
-insert into empo1 values(1,'goku',2000,1500),(2,'goku',2000,null),(3,'goku',2000,2000),(4,'goku',2000,null),(5,'goku',3000,1500);
-
+insert into empo1 values(1,'goku',2000,1500),(2,'vegeta',2000,null),(3,'gohan',2000,2000),(4,'trunks',2000,null),(5,'goten',3000,1500);
+insert into empo1 values(6,'latha',1500,1500);
 select * from empo1;
 
 -- eid	ename	sal		comm
@@ -192,7 +195,7 @@ select * from empo1;
 open sum_cur;
 repeat
 fetch sum_cur into id, nam, s, c;
-if s+c>3000 then
+if s+c=3000 then
 select s,c,id,nam;
 end if;
 until done end repeat;
@@ -213,10 +216,15 @@ create table stu(sid int(5)primary key, sname varchar(20), smail varchar(40));
 DELIMITER //
 create procedure crt_stu(sid int(5), sname varchar(20), smail varchar(40))
 begin
-declare exit handler for sqlexception select 'Error occured';
+declare continue handler for sqlexception select 'Error occured';
 insert into stu values(sid,sname,smail);    
 select * from stu;
 end //
 
-call crt_stu(1,'Anvesh','anvesh@gmail.com');
+call crt_stu(1,'Anvesh','anvesh123@gmail.com');
 call crt_stu(2,'Roy','Roy@gmail.com');
+
+select * from stu;
+
+
+DELIMITER //
