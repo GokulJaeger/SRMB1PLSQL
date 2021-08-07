@@ -70,6 +70,7 @@ select * from myemp;
 -- 7	Askcachm	6985		20000.00		2			2000
 
 create table empcommnul as (select * from myemp where comm is null);
+delete from myemp where comm is null;
 
 desc empcommnul;
 
@@ -92,6 +93,10 @@ select * from empcommnul;
 -- 5	natsu		1240						0	
 -- 6	tanjiro		5498	25000.00			5	
 
+select * from myemp;
+
+-- eno	ename		deptno		esal		experience		comm
+-- 7	Askcachm	6985		20000.00		2			2000
 
 
 
